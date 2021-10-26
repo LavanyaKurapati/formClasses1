@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <h1>Score of the Students</h1>
+
+        <form class="form-container" onsubmit=clickSubmit()>
+            <div class="label-container">
+                <label class="label-text">Name</label>
+                <input type="text" placeholder="Enter your name" class="input-text" id="name">
+            </div>
+            <div class="label-container">
+                <label class="label-text">College Name</label>
+                <input type="text" placeholder="Enter college name" class="input-text" id="college">
+            </div>
+            <div class="label-container">
+                <label class="label-text">Branch</label>
+                <input type="text" placeholder="Enter branch name" class="input-text" id="branch">
+            </div>
+            <h4 class="heading">Enter Marks</h4>
+            <div class="label-container">
+                <label class="label-text">First Year</label>
+                <input type="text" placeholder="Enter the marks" class="input-text" id="firstYear">
+            </div>
+            <div class="label-container">
+                <label class="label-text">Second Year</label>
+                <input type="text" placeholder="Enter the marks" class="input-text" id="secondYear">
+            </div>
+            <div class="label-container">
+                <label class="label-text">Third Year</label>
+                <input type="text" placeholder="Enter the marks" class="input-text" id="thirdYear">
+            </div>
+            <div class="label-container">
+                <label class="label-text">Final Year</label>
+                <input type="text" placeholder="Enter the marks" class="input-text" id="finalYear">
+            </div>
+
+
+            <button type="submit" id="submitBtn" class="submit-button">Submit</button>
+
+        </form>
+
+        <h1>Result</h1>
+
+        <table border="1" width="600" id="tableContainer">
+            <tr class="row-header">
+                <th>Name</th>
+                <th>College</th>
+                <th>Branch</th>
+                <th>Average</th>
+            </tr>
+        </table>
+
+    </div>
+
+    <script>
+        const submitBtn = document.getElementById("submitBtn");
+
+        const name = document.getElementById("name");
+        const college = document.getElementById("college");
+        const branch = document.getElementById("branch");
+
+        const firstYear = document.getElementById("firstYear");
+        const secondYear = document.getElementById("secondYear");
+        const thirdYear = document.getElementById("thirdYear");
+        const finalYear = document.getElementById("finalYear");
+
+
+        function clickSubmit() {
+            const student_details = [];
+
+            event.preventDefault();
+            const nameValue = name.value;
+            const collegeValue = college.value;
+            const branchValue = branch.value;
+
+
+            const marks = [firstYear.value,
+                secondYear.value, thirdYear.value, finalYear.value
+            ];
+
+
+            /*const firstValue = firstYear.value;
+            const secondValue = secondYear.value;
+            const thirdValue = thirdYear.value;
+            const finalValue = finalYear.value;
+            */
+            student_details.push(nameValue, collegeValue, branchValue, marks);
+
+            const tableContainer = document.getElementById("tableContainer");
+            const rowHeader = document.createElement("tr");
+
+
+
+
+            class Form {
+                constructor(name, collegeName, branch, marks) {
+                    this.name = name;
+                    this.collegeName = collegeName;
+                    this.branch = branch;
+                    this.marks = marks;
+                    console.log(marks);
+                }
+                getName() {
+                    let item1 = document.createElement("td");
+                    item1.textContent = `${this.name}`;
+                    rowHeader.appendChild(item1)
+                }
+
+                getCollegeName() {
+                    let item2 = document.createElement("td");
+                    item2.textContent = `${this.collegeName}`;
+                    rowHeader.appendChild(item2)
+                }
+
+                getBranch() {
+                    let item3 = document.createElement("td");
+                    item3.textContent = `${this.branch}`;
+                    rowHeader.appendChild(item3);
+                }
+
+                calculateAverage() {
+                    let sum = 0;
+                    let score = this.marks;
+                    let length = score.length;
+                    for (let i of score) {
+                        sum += parseInt(i);
+                    }
+                    let average = sum / length;
+                    console.log(average);
+
+                    let item4 = document.createElement("td");
+                    item4.textContent = average;
+                    rowHeader.appendChild(item4);
+                    rowHeader.classList.add("row-items")
+                    tableContainer.appendChild(rowHeader);
+                }
+
+
+            }
+
+            const person1 = new Form(student_details[0], student_details[1], student_details[2], student_details[3]);
+            person1.getName();
+            person1.getCollegeName();
+            person1.getBranch();
+            person1.calculateAverage();
+            student_details.value = [];
+            name.value = "";
+            college.value = "";
+            branch.value = "";
+            firstYear.value = "";
+            secondYear.value = "";
+            thirdYear.value = "";
+            finalYear.value = "";
+            marks.value = [];
+        }
+    </script>
+</body>
+
+</html>
